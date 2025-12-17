@@ -54,6 +54,7 @@ print("Training data exported to:", output_training_data)
 
 #2 Training the deep learning model
 # 2.1 computing class weight
+class_ids = [0,1,2,3,4] # your class ID
 def compute_class_weights(labels_folder, class_ids):
     all_pixels = []
     for filename in os.listdir(labels_folder):
@@ -83,7 +84,8 @@ def compute_class_weights(labels_folder, class_ids):
     class_weights_json = json.dumps(weights)
 
     return weights, class_weights_json
-
+weights, class_weights_json = compute_class_weights(labels_folder, class_ids)
+print(f"weights: {class_weights_json}")
 # 2.2 setting parameters
 augmentation_parameters = {
     "do_flip": True,
